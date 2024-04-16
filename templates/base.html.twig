@@ -31,6 +31,7 @@
 </head>
 <body>
 
+{% block navbar %}
 <header id="header" id="home">
     <div class="container header-top">
         <div class="row">
@@ -77,7 +78,9 @@
         </div>
     </div>
 </header><!-- #header -->
+{% endblock %}
 
+{% block body %}
 
 <!-- start banner Area -->
 <section class="banner-area relative" id="home">
@@ -485,7 +488,9 @@
 </section>
 <!-- End gallery Area -->
 
+{% endblock %}
 
+{% block footer %}
 <!-- start footer Area -->
 <footer class="footer-area section-gap">
     <div class="container">
@@ -536,6 +541,7 @@
     </div>
 </footer>
 <!-- End footer Area -->
+{% endblock %}
 
 <script src="{{ asset('assets-front/js/vendor/jquery-2.2.4.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

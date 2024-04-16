@@ -40,12 +40,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setNumTel(1234);
-            $user->setRole('ROLE_USER');
-            $user->setNom('nom');
-            $user->setPrenom('prenom');
-            $user->setRoles(['ROLE_USER']);
-            $user->setRole('ROLE_USER');
+
+            $user->setRoles([$form->get('role')->getData()]);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -78,12 +74,12 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_login');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_home');
     }
 }

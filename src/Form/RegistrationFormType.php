@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +19,45 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('nom')
+            ->add('prenom')
+            ->add('numTel')
+            ->add('role', ChoiceType::class, [
+                'choices' => [
+                    'Client' => 'ROLE_CLIENT',
+                    'Artist' => 'ROLE_ARTIST',
+                    'Admin' => 'ROLE_ADMIN',
+                ],
+                'expanded' => false,
+                'multiple' => false,
+            ])
+//            ->add('role', ChoiceType::class, [
+//                'choices' => [
+//                    'Client' => 'ROLE_CLIENT',
+//                    'Artist' => 'ROLE_ARTIST',
+//                    'Admin' => 'ROLE_ADMIN',
+//                ],
+//                'expanded' => false,
+//                'multiple' => false,
+//                'choice_attr' => function ($choice, $key, $value) {
+//                    // Define images for each role
+//                    $imageMap = [
+//                        'Client' => 'roles-icons/icon-admin.png',
+//                        'Artist' => 'roles-icons/icon-artist.png',
+//                        'Admin' => 'roles-icons/icon-admin.png',
+//                    ];
+//
+//                    // Check if the role exists in the image map
+//                    if (array_key_exists($value, $imageMap)) {
+//                        // If it exists, return the data-image attribute with the corresponding image path
+//                        return ['data-image' => $imageMap[$value]];
+//                    }
+//
+//                    // If the role is not found in the image map, return an empty array
+//                    return [];
+//                },
+//            ])
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
