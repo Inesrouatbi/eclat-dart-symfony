@@ -1,4 +1,10 @@
 security:
+    role_hierarchy:
+        ROLE_CLIENT:
+        ROLE_ARTIST:
+            - ROLE_CLIENT
+        ROLE_ADMIN:
+            - ROLE_ARTIST  # Optionally, grant additional roles to ROLE_ADMIN
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
