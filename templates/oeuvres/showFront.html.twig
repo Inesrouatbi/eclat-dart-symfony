@@ -1,0 +1,54 @@
+{% extends 'baseFront.html.twig' %}
+
+
+{% block content %}
+    <h1>Oeuvres</h1>
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reclamations /</span> Display</h4>
+
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <tbody class="table-border-bottom-0">
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ oeuvre.prix }}</td>
+                        </tr>
+                        <tr>
+                            <th>Titre</th>
+                            <td>{{ oeuvre.titre }}</td>
+                        </tr>
+                        <tr>
+                            <th>Categorie</th>
+                            <td>{{ oeuvre.categorie }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ oeuvre.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Img</th>
+                            <td> <img src="{{ asset('uploads/images/' ~ oeuvre.img) }}" alt="Event Image"
+                                      class="img-thumbnail" style="width: 100px; height: 100px;"></td>
+                        </tr>
+                        <tr>
+                            <th>Iduser</th>
+                            <td>{{ oeuvre.iduser }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_oeuvres_index') }}">back to list</a>
+
+                    <a href="{{ path('app_oeuvres_edit', {'id': oeuvre.idoeuvre}) }}">edit</a>
+
+                    {{ include('oeuvres/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

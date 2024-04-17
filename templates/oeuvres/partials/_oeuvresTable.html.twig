@@ -1,0 +1,21 @@
+{# templates/oeuvres/partials/_oeuvresTable.html.twig #}
+{% for oeuvre in oeuvres %}
+    <tr>
+        <td>{{ oeuvre.prix }}</td>
+        <td>{{ oeuvre.titre }}</td>
+        <td>{{ oeuvre.categorie }}</td>
+        <td>{{ oeuvre.description }}</td>
+        <td>
+            <img src="{{ asset('uploads/images/' ~ oeuvre.img) }}" alt="Oeuvre Image" class="img-thumbnail" style="width: 100px; height: 100px;">
+        </td>
+        <td>{{ oeuvre.iduser }}</td>
+        <td>
+            <a href="{{ path('app_oeuvres_show', {'id': oeuvre.idoeuvre}) }}">show</a>
+            <a href="{{ path('app_oeuvres_edit', {'id': oeuvre.idoeuvre}) }}">edit</a>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="7">no records found</td>
+    </tr>
+{% endfor %}

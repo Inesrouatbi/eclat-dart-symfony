@@ -1,0 +1,19 @@
+{# templates/oeuvres/partials/_oeuvresGrid.html.twig #}
+{% for oeuvre in oeuvres %}
+    <div class="col-sm-4">
+        <div class="blog_h_1i clearfix">
+            <a href="{{ path('app_oeuvres_show', {'id': oeuvre.id}) }}"><img src="{{ asset('uploads/images/' ~ oeuvre.img) }}" class="iw" alt="{{ oeuvre.titre }}" height="260"></a>
+            <h6>
+                <!-- Here you would format the date or include other metadata -->
+                <i class="fa fa-user col_1"></i> {{ oeuvre.prix }}
+            </h6>
+            <h4><a href="{{ path('app_oeuvres_show', {'id': oeuvre.id}) }}">{{ oeuvre.titre }}</a></h4>
+            <p>{{ oeuvre.description|length > 150 ? oeuvre.description|slice(0, 150) ~ '...' : oeuvre.description }}</p>
+            <h5><a class="button mgt" href="{{ path('app_oeuvres_reserve', {'id': oeuvre.idoeuvre}) }}">Reserver</a></h5> <!-- Update the path as necessary -->
+        </div>
+    </div>
+{% else %}
+    <div class="col-12">
+        <p>No oeuvres found.</p>
+    </div>
+{% endfor %}

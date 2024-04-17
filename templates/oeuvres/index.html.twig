@@ -1,0 +1,94 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <h1>Oeuvres index</h1>
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Oeuvres /</span> Display</h4>
+            <div class="mb-3">
+                <button class="btn btn-primary filter-btn" data-categorie="All">All</button>
+                {% for categorie in categories %}
+                    <button class="btn btn-primary filter-btn" data-categorie="{{ categorie }}">{{ categorie }}</button>
+                {% endfor %}
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by Title">
+            </div>
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table" id="oeuvresTable">
+                        <thead>
+                        <tr>
+                            <th>Prix</th>
+                            <th>Titre</th>
+                            <th>Categorie</th>
+                            <th>Description</th>
+                            <th>Img</th>
+                            <th>Iduser</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                        {% for oeuvre in oeuvres %}
+                            <tr>
+                                <td>{{ oeuvre.prix }}</td>
+                                <td>{{ oeuvre.titre }}</td>
+                                <td>{{ oeuvre.categorie }}</td>
+                                <td>{{ oeuvre.description }}</td>
+                                <td>
+                                    <img src="{{ asset('uploads/images/' ~ oeuvre.img) }}" alt="Event Image"
+                                         class="img-thumbnail" style="width: 100px; height: 100px;">
+                                </td>
+                                <td>{{ oeuvre.iduser }}</td>
+                                <td>
+                                    <a href="{{ path('app_oeuvres_show', {'id': oeuvre.idoeuvre}) }}">show</a>
+                                    <a href="{{ path('app_oeuvres_edit', {'id': oeuvre.idoeuvre}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ path('app_oeuvres_new') }}">Create new</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            const loadOeuvres = (categorie = 'All', titre = '') => {
+                $.ajax({
+                    url: '{{ path('load_oeuvres') }}',
+                    type: 'GET',
+                    data: {
+                        categorie: categorie,
+                        titre: titre
+                    },
+                    success: function(data) {
+                        $('#oeuvresTable tbody').html(data);
+                    }
+                });
+            };
+
+            $('.filter-btn').click(function() {
+                const categorie = $(this).data('categorie');
+                const titre = $('#searchInput').val();
+                loadOeuvres(categorie, titre);
+            });
+
+            $('#searchInput').on('keyup', function() {
+                const titre = $(this).val();
+                const categorie = $('.filter-btn.active').data('categorie') || 'All';
+                loadOeuvres(categorie, titre);
+            });
+
+            // Initial load
+            loadOeuvres();
+        });
+    </script>
+{% endblock %}

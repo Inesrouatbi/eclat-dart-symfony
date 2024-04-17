@@ -1,0 +1,78 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <h1>Oeuvres Index</h1>
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Oeuvres /</span> Display</h4>
+            <div class="mb-3">
+                <button class="btn btn-primary filter-btn" data-categorie="All">All</button>
+                {% for categorie in categories %}
+                    <button class="btn btn-primary filter-btn" data-categorie="{{ categorie }}">{{ categorie }}</button>
+                {% endfor %}
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by Title">
+            </div>
+            <div class="row" id="oeuvresGrid">
+                {% for oeuvre in oeuvres %}
+                    <div class="col-sm-4">
+                        <div class="blog_h_1i clearfix">
+                            <a href="{{ path('app_oeuvres_showFront', {'id': oeuvre.idoeuvre}) }}"><img
+                                        src="{{ asset('uploads/images/' ~ oeuvre.img) }}" class="iw"
+                                        alt="{{ oeuvre.titre }}" height="260"></a>
+                            <h6>
+                                {{ oeuvre.prix }} Dt
+                            </h6>
+                            <h4><a href="{{ path('app_oeuvres_show', {'id': oeuvre.idoeuvre}) }}">{{ oeuvre.titre }}</a>
+                            </h4>
+                            <p>{{ oeuvre.description|length > 150 ? oeuvre.description|slice(0, 150) ~ '...' : oeuvre.description }}</p>
+
+                            <h5><a class="button mgt" href="{{ path('app_oeuvres_reserve', {'id': oeuvre.idoeuvre}) }}">Reserver</a>
+                            </h5> <!-- Update the path as necessary -->
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class="col-12">
+                        <p>No oeuvres found.</p>
+                    </div>
+                {% endfor %}            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const loadOeuvres = (categorie = 'All', titre = '') => {
+                $.ajax({
+                    url: '{{ path('load_oeuvresFront') }}', // Make sure this path is correct
+                    type: 'GET',
+                    data: {
+                        categorie: categorie,
+                        titre: titre
+                    },
+                    success: function (data) {
+                        $('#oeuvresGrid').html(data);
+                    }
+                });
+            };
+
+            $('.filter-btn').click(function () {
+                const categorie = $(this).data('categorie');
+                const titre = $('#searchInput').val();
+                loadOeuvres(categorie, titre);
+            });
+
+            $('#searchInput').on('keyup', function () {
+                const titre = $(this).val();
+                const categorie = $('.filter-btn.active').data('categorie') || 'All';
+                loadOeuvres(categorie, titre);
+            });
+
+            // Initial load
+            loadOeuvres();
+        });
+    </script>
+{% endblock %}

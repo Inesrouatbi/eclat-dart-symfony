@@ -1,0 +1,43 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reservations{% endblock %}
+
+{% block content %}
+    <h1>Reservations</h1>
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reclamations /</span> Display</h4>
+
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>IdReservation</th>
+                            <td>{{ reservation.idReservation }}</td>
+                        </tr>
+                        <tr>
+                            <th>DateReservation</th>
+                            <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Oeuvre</th>
+                            <td>{{ reservation.oeuvreID.titre }}</td>
+                        </tr>
+                        <tr>
+                            <th>Statut</th>
+                            <td>{{ reservation.statut }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_reservations_index') }}">back to list</a>
+
+                    {{ include('reservations/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

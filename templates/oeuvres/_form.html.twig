@@ -1,0 +1,39 @@
+
+<div class="container mt-5">
+    {{ form_start(form, {'attr': {'class': 'form', 'novalidate': 'novalidate'}}) }}
+
+    <div class="mb-3">
+        {{ form_label(form.prix) }}
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.prix) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.titre) }}
+        {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre'}}) }}
+        {{ form_errors(form.titre) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.categorie) }}
+        {{ form_widget(form.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Catégorie'}}) }}
+        {{ form_errors(form.categorie) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.img) }}
+        {{ form_widget(form.img, {'attr': {'class': 'form-control', 'placeholder': 'Image URL'}}) }}
+        {{ form_errors(form.img) }}
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+    {{ form_end(form) }}
+</div>

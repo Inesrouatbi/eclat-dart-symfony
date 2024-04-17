@@ -1,0 +1,46 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reservations index{% endblock %}
+
+{% block content %}
+    <h1>Reservations index</h1>
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reclamations /</span> Display</h4>
+
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>DateReservation</th>
+                            <th>Statut</th>
+                            <th>Oeuvres</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+                                <td>{{ reservation.statut }}</td>
+                                <td>{{ reservation.oeuvreID.titre }}</td>
+                                <td>
+                                    <a href="{{ path('app_reservations_showBack', {'idReservation': reservation.idReservation}) }}">show</a>
+                                    <a href="{{ path('app_reservations_edit', {'idReservation': reservation.idReservation}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
