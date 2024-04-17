@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -30,9 +31,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank(message: "Nom cannot be blank.")]
+
     private ?string $nom = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank(message: "Prenom cannot be blank.")]
+    #[Assert\Length(max: 30, maxMessage: "Prenom cannot be longer than {{ limit }} characters.")]
+    #[Assert\Regex(
+        pattern: "/^[A-Za-z]+$/",
+        message: "Prenom should only contain alphabetic characters."
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 30)]

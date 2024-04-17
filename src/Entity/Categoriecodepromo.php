@@ -16,11 +16,13 @@ class Categoriecodepromo
 
     #[ORM\Column (type: "float", name: "pourcentage")]
     #[Assert\Type(type: "float", message: "The value {{ value }} is not a valid float.")]
+    #[Assert\Positive(message: "The value must be positive.")]
     #[Assert\NotBlank(message: "The value cannot be void.")]
     private ?float $pourcentage = null;
 
     #[ORM\Column( name: "clé" ,length: 11)]
     #[Assert\Length(max: 10, maxMessage: "The key cannot be longer than {{ limit }} characters.")]
+    #[Assert\Length(min: 5, minMessage: "The key cannot be less than {{ limit }} characters.")]
     #[Assert\NotBlank(message: "The value cannot be blank.")]
     private ?string $cle = null;
 
