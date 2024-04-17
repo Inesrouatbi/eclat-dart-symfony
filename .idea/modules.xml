@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/rachidaPi.iml" filepath="$PROJECT_DIR$/.idea/rachidaPi.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/ines-user.iml" filepath="$PROJECT_DIR$/.idea/ines-user.iml" />
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
     </modules>
   </component>
 </project>

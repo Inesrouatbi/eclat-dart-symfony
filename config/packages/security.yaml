@@ -1,18 +1,50 @@
 security:
+<<<<<<< HEAD
+=======
+    role_hierarchy:
+        ROLE_CLIENT:
+        ROLE_ARTIST:
+            - ROLE_CLIENT
+        ROLE_ADMIN:
+            - ROLE_ARTIST  # Optionally, grant additional roles to ROLE_ADMIN
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
+<<<<<<< HEAD
         users_in_memory: { memory: null }
+=======
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
+<<<<<<< HEAD
             provider: users_in_memory
+=======
+            provider: app_user_provider
+            custom_authenticator: App\Security\LoginAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: true
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

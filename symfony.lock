@@ -267,18 +267,35 @@
             "./config/routes/web_profiler.yaml"
         ]
     },
+<<<<<<< HEAD
     "symfony/webapp-pack": {
         "version": "1.2",
+=======
+    "symfonycasts/reset-password-bundle": {
+        "version": "1.19",
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.0",
+<<<<<<< HEAD
             "ref": "7d5c5e282f7e2c36a2c3bbb1504f78456c352407"
         },
         "files": [
             "./config/packages/messenger.yaml"
         ]
     },
+=======
+            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
+        },
+        "files": [
+            "./config/packages/reset_password.yaml"
+        ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.15.0"
+    },
+>>>>>>> 076282ce7e5aec2d6e508d4799d47227471ade67
     "twig/extra-bundle": {
         "version": "v3.8.0"
     }
