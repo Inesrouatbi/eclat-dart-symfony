@@ -126,7 +126,7 @@
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ user.nom }}  {{ user.prenom }}</li>
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; {{ user.numTel }}</li>
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ user.email }}</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp;
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email : </strong> &nbsp;
                                     {% if user.isVerified == 1  %}
                                         <span class="badge badge-sm p-2 bg-gradient-success">{{ user.isVerified ? 'Verified' : 'Not verified' }}</span>
                                     {% else %}
