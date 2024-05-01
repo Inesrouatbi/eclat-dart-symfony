@@ -60,12 +60,16 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="index.html">Home</a></li>
+                    {% if app.user %}
+                    <li><a href="{{ path('app_Profile') }}">Profile</a></li>
+                    {% endif %}
                     <li><a href="#">About</a></li>
                     <li><a href="#">Gallery</a></li>
                     <li><a href="#">Events</a></li>
                     <li><a href="#">Ticket</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Contact</a></li>
+                    
                     <li class="menu-has-children"><a href="">Pages</a>
                         <ul>
                             <li><a href="#">Blog Single</a></li>
@@ -73,7 +77,11 @@
                             <li><a href="#">Elements</a></li>
                         </ul>
                     </li>
+                       {% if app.user %}
+                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                      {% endif %}
                 </ul>
+                
             </nav><!-- #nav-menu-container -->
         </div>
     </div>
