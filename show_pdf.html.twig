@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrat de réservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #56ab2f;
+            font-style: italic;
+        }
+        .reservation-details {
+            margin-top: 30px;
+        }
+        .reservation-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .reservation-details th,
+        .reservation-details td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contrat de réservation</h1>
+        <div class="reservation-details">
+            <table>
+                <tr>
+                    <th>Date de réservation</th>
+                    <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                <th>Titre</th>
+                <td>{{ reservation.oeuvreID.titre }}</td>
+                </tr>
+                 <tr>
+                <th>Image</th>
+                <td>{{ reservation.oeuvreID.img }}</td>
+                </tr>
+                <tr>
+                <th>Prix</th>
+                <td>{{ reservation.oeuvreID.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ reservation.oeuvreID.description }}</td>
+                    </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>{{ reservation.statut }}</td>
+                </tr>
+
+                <!-- Ajoutez d'autres détails de réservation selon vos besoins -->
+            </table>
+        </div>
+    </div>
+</body>
+</html>
