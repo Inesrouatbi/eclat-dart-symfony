@@ -6,7 +6,7 @@
 <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
         <div class="col-12">
-            <!-- Navbar -->
+  <!-- Navbar -->
             <nav class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                 <div class="container-fluid ps-2 pe-0">
                     <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="#">
@@ -20,9 +20,19 @@
               </span>
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
-                        <ul class="navbar-nav mx-auto">
-                          
-                            
+                      <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="#">
+                                    <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
+                                    Dashboard
+                                    </a>
+                                </li>
+                              <li class="nav-item">
+                                <a class="nav-link me-2" href="#">
+                                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                                    Profile
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link me-2" href="{{ path('app_register') }}">
                                     <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
@@ -36,14 +46,12 @@
                                 </a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
             </nav>
             <!-- End Navbar -->
         </div>
     </div>
-   
 </div>
 {% endblock %}
 {% block body %}
@@ -103,7 +111,12 @@
     </button>
 </form>
 
-                            </form>
+      <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <p class="mb-2 text-sm mx-auto">
+                                    Forgot your password ?
+                                    <a href="{{ path('app_forgot_password_request') }}" class="text-primary text-gradient font-weight-bold">Reset</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
