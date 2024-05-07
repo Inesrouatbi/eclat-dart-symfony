@@ -34,22 +34,22 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $user->setPassword(# Cette méthode prend en charge le hachage du mot de passe. Elle prend deux arguments .
                 $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
+                    $user,#C'est l'entité utilisateur à laquelle le mot de passe est associé.
+                    $form->get('plainPassword')->getData()  #$form->get('plainPassword')->getData(): C'est le mot de passe brut récupéré à partir du formulaire.
                 )
             );
 
-            $user->setRoles([$form->get('role')->getData()]);
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $user->setRoles([$form->get('role')->getData()]);#insérant un nouvel enregistrement avec les rôles spécifiés dans la table des utilisateurs.
+            $entityManager->persist($user);#Cette ligne utilise l'EntityManager de Doctrine pour marquer l'entité utilisateur $user comme étant à persister
+            $entityManager->flush();#déclenche l'exécution réelle de toutes les opérations d'enregistrement (persist, update, delete) qui ont été enregistrées avec l'EntityManager
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('ines.rouatbi14@gmail.com', 'ines.rouatbi14@gmail.com'))
-                    ->to($user->getEmail())
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user, # C'est un appel à la méthode sendEmailConfirmation() de l'objet $this->emailVerifier. Cette méthode est responsable de l'envoi de l'e-mail de confirmation
+                (new TemplatedEmail())#Cela crée une nouvelle instance de la classe TemplatedEmail
+                    ->from(new Address('ines.rouatbi14@gmail.com', 'ines.rouatbi14@gmail.com'))#l'adresse e-mail de l'expéditeur
+                    ->to($user->getEmail())#l'adresse e-mail du destinataire
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
@@ -58,8 +58,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('registration/register.html.twig', [#  génère une réponse HTTP sous forme de page HTML  C'est le chemin vers le modèle Twig à utiliser pour générer la page HTML
+            'registrationForm' => $form->createView(),#C'est un tableau associatif contenant les données à passer au modèle Twig pour son rendu
         ]);
     }
 
@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
+        } catch (VerifyEmailExceptionInterface $exception) {#levée lorsqu'il y a un problème avec la vérification de l'e-mail.
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_login');

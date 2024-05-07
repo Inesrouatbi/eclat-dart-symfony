@@ -21,7 +21,7 @@ use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 #[Route('/reset-password')]
-class ResetPasswordController extends AbstractController
+class ResetPasswordController extends AbstractController   
 {
     use ResetPasswordControllerTrait;
 
@@ -42,14 +42,14 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->processSendingPasswordResetEmail(
-                $form->get('email')->getData(),
-                $mailer,
+                $form->get('email')->getData(),#Récupère l'objet représentant le champ de formulaire associé à l'e-mail
+                $mailer,#C'est l'objet qui implémente l'interface MailerInterface, utilisé pour envoyer des e-mails dans Symfony
                 $translator
             );
         }
 
         return $this->render('reset_password/request.html.twig', [
-            'requestForm' => $form->createView(),
+            'requestForm' => $form->createView(),# C'est la clé qui sera utilisée dans le modèle Twig pour accéder au formulaire de demande de réinitialisation de mot de passe.
         ]);
     }
 
@@ -61,7 +61,7 @@ class ResetPasswordController extends AbstractController
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
-        if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+        if (null === ($resetToken = $this->getTokenObjectFromSession())) {#Si aucun jeton de réinitialisation de mot de passe n'est trouvé dans la session, cette ligne de code génère un faux jeton de réinitialisation
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
@@ -132,7 +132,7 @@ class ResetPasswordController extends AbstractController
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer, TranslatorInterface $translator): RedirectResponse
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy([
-            'email' => $emailFormData,
+            'email' => $emailFormData,// assigne la valeur de l'adresse e-mail saisie dans le formulaire à une variable avec la clé 'email
         ]);
 
         // Do not reveal whether a user account was found or not.
